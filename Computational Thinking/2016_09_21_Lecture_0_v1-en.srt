@@ -1,0 +1,776 @@
+0
+00:00:00,000 --> 00:00:05,990
+...
+
+1
+00:00:05,990 --> 00:00:09,740
+Welcome to 600.2x.
+
+2
+00:00:09,740 --> 00:00:12,470
+I'm John Guttag, a professor of electrical engineering
+
+3
+00:00:12,470 --> 00:00:17,060
+and computer science at MIT, and I'll be lecturing this course.
+
+4
+00:00:17,060 --> 00:00:21,020
+Actually, I'll be doing almost all of the lectures, not all.
+
+5
+00:00:21,020 --> 00:00:24,000
+There'll be one guest lecture by Eric Grimson,
+
+6
+00:00:24,000 --> 00:00:28,770
+who some of you may remember fondly from 600.1x.
+
+7
+00:00:28,770 --> 00:00:31,440
+Before we start the course, you probably
+
+8
+00:00:31,440 --> 00:00:33,830
+want to know what do I expect you to know
+
+9
+00:00:33,830 --> 00:00:36,060
+at the beginning of the course?
+
+10
+00:00:36,060 --> 00:00:40,240
+Well, the first thing I expect you to know is how to program.
+
+11
+00:00:40,240 --> 00:00:42,080
+More specifically, I expect you to know how
+
+12
+00:00:42,080 --> 00:00:44,420
+to program in Python.
+
+13
+00:00:44,420 --> 00:00:49,520
+Ideally, you'll have written a program of at least 150 lines.
+
+14
+00:00:49,520 --> 00:00:51,830
+Don't panic if the biggest program you've written
+
+15
+00:00:51,830 --> 00:00:56,410
+is 100 lines, maybe even 90 lines, 70 lines.
+
+16
+00:00:56,410 --> 00:00:58,340
+But if you're not comfortable, if you're
+
+17
+00:00:58,340 --> 00:01:00,760
+struggling writing simple programs,
+
+18
+00:01:00,760 --> 00:01:02,600
+this is not the course for you.
+
+19
+00:01:02,600 --> 00:01:04,860
+We're assuming you already know how to program,
+
+20
+00:01:04,860 --> 00:01:08,600
+and that you already know how to program in Python.
+
+21
+00:01:08,600 --> 00:01:14,740
+As it says in the slide, we teach the course in Python 3.5.
+
+22
+00:01:14,740 --> 00:01:16,760
+And clearly, if you've programmed in that,
+
+23
+00:01:16,760 --> 00:01:18,580
+that's advantageous.
+
+24
+00:01:18,580 --> 00:01:23,420
+No need to worry if your experience is in 2.6, 2.7.
+
+25
+00:01:23,420 --> 00:01:26,060
+The differences are very minimal between the versions
+
+26
+00:01:26,060 --> 00:01:27,110
+of the language.
+
+27
+00:01:27,110 --> 00:01:31,060
+And you won't have any trouble catching on.
+
+28
+00:01:31,060 --> 00:01:33,820
+We also expect you to have some familiarity
+
+29
+00:01:33,820 --> 00:01:38,640
+with the basic concepts of computational complexity.
+
+30
+00:01:38,640 --> 00:01:40,750
+We'll be looking at some interesting programs
+
+31
+00:01:40,750 --> 00:01:43,880
+in this course and talking about whether they're
+
+32
+00:01:43,880 --> 00:01:46,570
+practical or not practical.
+
+33
+00:01:46,570 --> 00:01:48,570
+Whether a program is practical often
+
+34
+00:01:48,570 --> 00:01:50,620
+depends upon its performance.
+
+35
+00:01:50,620 --> 00:01:53,290
+Will it run fast enough to actually give you
+
+36
+00:01:53,290 --> 00:01:56,150
+an answer in a timely way?
+
+37
+00:01:56,150 --> 00:01:57,860
+In order to understand those things,
+
+38
+00:01:57,860 --> 00:02:01,470
+you need to understand a bit about complexity.
+
+39
+00:02:01,470 --> 00:02:03,370
+Not the details, I don't expect you to have
+
+40
+00:02:03,370 --> 00:02:05,250
+taken an algorithms course.
+
+41
+00:02:05,250 --> 00:02:07,170
+But I do expect you to know the difference
+
+42
+00:02:07,170 --> 00:02:10,620
+between a linear algorithm, a polynomial logarithm,
+
+43
+00:02:10,620 --> 00:02:12,132
+and an exponential algorithm.
+
+44
+00:02:12,132 --> 00:02:14,850
+
+
+45
+00:02:14,850 --> 00:02:17,990
+Along those lines, we expect some familiarity
+
+46
+00:02:17,990 --> 00:02:24,010
+with simple algorithms, things like binary search, merge sort.
+
+47
+00:02:24,010 --> 00:02:28,230
+If you have taken 600.1x, you're golden.
+
+48
+00:02:28,230 --> 00:02:31,760
+That contains more than you need to take this course.
+
+49
+00:02:31,760 --> 00:02:33,730
+If you haven't, well, then, you need
+
+50
+00:02:33,730 --> 00:02:37,830
+to know the things I've just been talking about.
+
+51
+00:02:37,830 --> 00:02:42,360
+Those of you who have taken 600.1x are probably wondering
+
+52
+00:02:42,360 --> 00:02:44,280
+how do the courses differ?
+
+53
+00:02:44,280 --> 00:02:46,230
+How do they compare to each other?
+
+54
+00:02:46,230 --> 00:02:48,190
+Well first, some good news.
+
+55
+00:02:48,190 --> 00:02:50,910
+I think you'll find the programming assignments a bit
+
+56
+00:02:50,910 --> 00:02:57,190
+easier than 600.1x, not because they're intrinsically easier,
+
+57
+00:02:57,190 --> 00:02:59,670
+but because you're a better programmer than you were when
+
+58
+00:02:59,670 --> 00:03:03,330
+you started 600.1x.
+
+59
+00:03:03,330 --> 00:03:07,210
+Also, I think what you'll find is that you struggle
+
+60
+00:03:07,210 --> 00:03:10,600
+less with the actual coding and maybe more
+
+61
+00:03:10,600 --> 00:03:12,890
+with understanding the concepts that you
+
+62
+00:03:12,890 --> 00:03:15,200
+are trying to implement.
+
+63
+00:03:15,200 --> 00:03:18,050
+And that's in keeping with what this course is about.
+
+64
+00:03:18,050 --> 00:03:20,390
+The focus is more on the problem to be
+
+65
+00:03:20,390 --> 00:03:25,580
+solved than on the actual programming of the solution.
+
+66
+00:03:25,580 --> 00:03:29,310
+For that reason, the lectures are more abstract than they
+
+67
+00:03:29,310 --> 00:03:32,420
+were in 600.1x.
+
+68
+00:03:32,420 --> 00:03:35,590
+We're not going to say, here's this syntax of a FOR statement.
+
+69
+00:03:35,590 --> 00:03:38,450
+Here is what happens when the variable is changed.
+
+70
+00:03:38,450 --> 00:03:41,470
+Instead, we'll be talking about computation
+
+71
+00:03:41,470 --> 00:03:45,220
+in a more general way, problems in a more general way,
+
+72
+00:03:45,220 --> 00:03:48,250
+and how do we use computation to do something
+
+73
+00:03:48,250 --> 00:03:50,030
+that we truly care about?
+
+74
+00:03:50,030 --> 00:03:52,250
+One way to think about it is the course
+
+75
+00:03:52,250 --> 00:03:55,260
+is less about programming and more
+
+76
+00:03:55,260 --> 00:03:59,180
+about dipping your toe into those very interesting waters
+
+77
+00:03:59,180 --> 00:04:00,610
+of data science.
+
+78
+00:04:00,610 --> 00:04:04,090
+As pretty much everyone knows, today the data
+
+79
+00:04:04,090 --> 00:04:07,170
+is arriving with the world in a ferocious rate.
+
+80
+00:04:07,170 --> 00:04:09,240
+Unfortunately, data scientists are not
+
+81
+00:04:09,240 --> 00:04:12,210
+arriving in the world at a ferocious rate.
+
+82
+00:04:12,210 --> 00:04:14,220
+And so we're way behind in having
+
+83
+00:04:14,220 --> 00:04:17,610
+people who can keep up with the data and build useful things
+
+84
+00:04:17,610 --> 00:04:21,065
+with the data, extract useful information from it.
+
+85
+00:04:21,065 --> 00:04:22,440
+When you've finished this course,
+
+86
+00:04:22,440 --> 00:04:24,570
+you're not going to be a data scientist.
+
+87
+00:04:24,570 --> 00:04:27,180
+But you will have dipped your toe in that world
+
+88
+00:04:27,180 --> 00:04:30,380
+and be ready to learn more.
+
+89
+00:04:30,380 --> 00:04:31,970
+Why should you take this course?
+
+90
+00:04:31,970 --> 00:04:35,625
+Well, one, to become a better programmer, and two,
+
+91
+00:04:35,625 --> 00:04:41,080
+to begin to learn about making more productive use of data,
+
+92
+00:04:41,080 --> 00:04:45,380
+both how to think about data, and m statistically,
+
+93
+00:04:45,380 --> 00:04:50,500
+and how to use packages to make the programming easier.
+
+94
+00:04:50,500 --> 00:04:54,370
+All of that said, all of our emphasis on concepts,
+
+95
+00:04:54,370 --> 00:04:59,330
+there's still a big element of honing your programming skills.
+
+96
+00:04:59,330 --> 00:05:04,070
+Nobody becomes an expert programmer taking one course.
+
+97
+00:05:04,070 --> 00:05:07,780
+This course will help you solidify what you already
+
+98
+00:05:07,780 --> 00:05:09,900
+know about programming.
+
+99
+00:05:09,900 --> 00:05:12,840
+I will be introducing a few additional bits of Python
+
+100
+00:05:12,840 --> 00:05:15,400
+that were not covered in 600.1.
+
+101
+00:05:15,400 --> 00:05:16,870
+Not too much.
+
+102
+00:05:16,870 --> 00:05:18,270
+You'll have to bear with me.
+
+103
+00:05:18,270 --> 00:05:20,050
+I'm a software engineer by training.
+
+104
+00:05:20,050 --> 00:05:22,630
+I'll be delivering some sermons about programming
+
+105
+00:05:22,630 --> 00:05:24,212
+and how to write better software.
+
+106
+00:05:24,212 --> 00:05:26,170
+As I've already mentioned, we'll be showing you
+
+107
+00:05:26,170 --> 00:05:28,470
+some useful packages.
+
+108
+00:05:28,470 --> 00:05:31,430
+But a lot of what will make you a better programmer
+
+109
+00:05:31,430 --> 00:05:35,400
+can be traced to, well, let me tell a story about this.
+
+110
+00:05:35,400 --> 00:05:38,000
+What you see here is a picture of Carnegie Hall,
+
+111
+00:05:38,000 --> 00:05:40,120
+one of the world's most famous concert halls.
+
+112
+00:05:40,120 --> 00:05:41,660
+It's in New York City.
+
+113
+00:05:41,660 --> 00:05:44,750
+One day a tourist late for a concert
+
+114
+00:05:44,750 --> 00:05:47,580
+is desperately searching for Carnegie Hall,
+
+115
+00:05:47,580 --> 00:05:50,680
+finds a policeman, goes up to the policeman,
+
+116
+00:05:50,680 --> 00:05:55,230
+frantically says, tell me, how do you get to Carnegie Hall?
+
+117
+00:05:55,230 --> 00:05:59,030
+The policeman looks at the tourist and says, that's easy.
+
+118
+00:05:59,030 --> 00:06:02,900
+Practice, practice, and more practice.
+
+119
+00:06:02,900 --> 00:06:05,200
+And that's how you become a good programmer.
+
+120
+00:06:05,200 --> 00:06:09,680
+Practice, practice, and more practice.
+
+121
+00:06:09,680 --> 00:06:11,710
+What will you be practicing on?
+
+122
+00:06:11,710 --> 00:06:16,500
+What you'll be practicing on is building computational models.
+
+123
+00:06:16,500 --> 00:06:18,990
+Well, what is a computational model?
+
+124
+00:06:18,990 --> 00:06:23,450
+It's a device that helps us use computation to help understand
+
+125
+00:06:23,450 --> 00:06:26,110
+the world in which we live.
+
+126
+00:06:26,110 --> 00:06:30,320
+One way to think about it is as an experimental device
+
+127
+00:06:30,320 --> 00:06:32,670
+that can be used to help us understand something that's
+
+128
+00:06:32,670 --> 00:06:37,760
+already happened, or often more usefully, to predict something
+
+129
+00:06:37,760 --> 00:06:41,200
+that might happen in the future.
+
+130
+00:06:41,200 --> 00:06:46,050
+I like to draw an analogy to laboratory experiments.
+
+131
+00:06:46,050 --> 00:06:48,850
+When I was an undergraduate, what an experiment meant
+
+132
+00:06:48,850 --> 00:06:52,880
+was go into a laboratory, get your hands dirty,
+
+133
+00:06:52,880 --> 00:06:56,460
+breathe horrible fumes, maybe, in a chemistry lab
+
+134
+00:06:56,460 --> 00:07:00,480
+even though you weren't supposed to, and do an experiment.
+
+135
+00:07:00,480 --> 00:07:04,130
+Well, physical labs are not going to go away.
+
+136
+00:07:04,130 --> 00:07:07,050
+But they've certainly been supplemented these days
+
+137
+00:07:07,050 --> 00:07:12,130
+by virtual labs where we do the experiment not in a lab,
+
+138
+00:07:12,130 --> 00:07:14,050
+but on a computer.
+
+139
+00:07:14,050 --> 00:07:16,420
+And we learn an awful lot from doing
+
+140
+00:07:16,420 --> 00:07:19,280
+at least initial experiments that way.
+
+141
+00:07:19,280 --> 00:07:23,050
+So what kind of experimental devices are there?
+
+142
+00:07:23,050 --> 00:07:25,660
+There are optimization models, we'll
+
+143
+00:07:25,660 --> 00:07:30,970
+talk about those, statistical models, and simulation models.
+
+144
+00:07:30,970 --> 00:07:36,430
+All of these kinds of models are used a lot in practice.
+
+145
+00:07:36,430 --> 00:07:38,540
+Insurance companies, for example,
+
+146
+00:07:38,540 --> 00:07:40,450
+build models of customers that are
+
+147
+00:07:40,450 --> 00:07:45,270
+used to predict future claims, and thus, to price policies.
+
+148
+00:07:45,270 --> 00:07:48,410
+Doctors have models that predict normal laboratory readings
+
+149
+00:07:48,410 --> 00:07:50,930
+for patients and raise alarms when
+
+150
+00:07:50,930 --> 00:07:53,800
+a test is outside those bounds.
+
+151
+00:07:53,800 --> 00:07:57,480
+Google Maps, Apple Maps, Waze, etc.,
+
+152
+00:07:57,480 --> 00:08:01,000
+model possible routes between places as graphs,
+
+153
+00:08:01,000 --> 00:08:03,420
+and solve a graph optimization problem
+
+154
+00:08:03,420 --> 00:08:07,280
+to find what they claim will be an optimal route.
+
+155
+00:08:07,280 --> 00:08:09,120
+Cell phone providers build models
+
+156
+00:08:09,120 --> 00:08:11,310
+to predict how their service will
+
+157
+00:08:11,310 --> 00:08:15,120
+behave under various conditions and use these models to decide
+
+158
+00:08:15,120 --> 00:08:17,400
+where to put in new towers.
+
+159
+00:08:17,400 --> 00:08:20,430
+Biochemists build models of molecular interactions
+
+160
+00:08:20,430 --> 00:08:24,690
+that allow them to perform in silico, rather than in vivo,
+
+161
+00:08:24,690 --> 00:08:26,860
+experiments.
+
+162
+00:08:26,860 --> 00:08:29,760
+Mostly in this course, we'll look at models
+
+163
+00:08:29,760 --> 00:08:31,840
+that involve uncertainty.
+
+164
+00:08:31,840 --> 00:08:33,909
+But that's not where we'll start.
+
+165
+00:08:33,909 --> 00:08:39,190
+We'll start in lecture 1 with optimization models.
+
+166
+00:08:39,190 --> 00:08:41,909
+We will, as I said earlier, be giving you
+
+167
+00:08:41,909 --> 00:08:44,020
+problem sets to work on.
+
+168
+00:08:44,020 --> 00:08:45,780
+These are programming problems designed
+
+169
+00:08:45,780 --> 00:08:48,130
+to help you become a better programmer
+
+170
+00:08:48,130 --> 00:08:49,910
+and also to test your understanding
+
+171
+00:08:49,910 --> 00:08:52,770
+of the conceptual material, actually not really so much
+
+172
+00:08:52,770 --> 00:08:56,350
+to test it, as to help you solidify your understanding
+
+173
+00:08:56,350 --> 00:08:58,600
+of the conceptual material.
+
+174
+00:08:58,600 --> 00:09:01,730
+There will also be some small finger exercises.
+
+175
+00:09:01,730 --> 00:09:03,770
+These are programming problems designed
+
+176
+00:09:03,770 --> 00:09:06,990
+to cover just really one concept at a time
+
+177
+00:09:06,990 --> 00:09:09,450
+and help you learn those concepts.
+
+178
+00:09:09,450 --> 00:09:11,570
+There'll be reading assignments.
+
+179
+00:09:11,570 --> 00:09:13,510
+These are pretty important.
+
+180
+00:09:13,510 --> 00:09:15,470
+There'll be a lot of important concepts
+
+181
+00:09:15,470 --> 00:09:17,810
+that I'll touch on in the lectures
+
+182
+00:09:17,810 --> 00:09:23,229
+but not really explain as fully as maybe you would like.
+
+183
+00:09:23,229 --> 00:09:25,020
+And we'll be giving you reading assignments
+
+184
+00:09:25,020 --> 00:09:26,620
+to catch up on that.
+
+185
+00:09:26,620 --> 00:09:29,600
+The reading assignments will all be in the course text.
+
+186
+00:09:29,600 --> 00:09:32,410
+And here's good news for at least some of you.
+
+187
+00:09:32,410 --> 00:09:38,310
+If you took 600.1x, at least in the last iteration,
+
+188
+00:09:38,310 --> 00:09:39,910
+it's the same textbook.
+
+189
+00:09:39,910 --> 00:09:42,470
+You don't have to go buy a new one.
+
+190
+00:09:42,470 --> 00:09:45,550
+And finally, of course, there will be exams.
+
+191
+00:09:45,550 --> 00:09:47,910
+And those will be based upon the programming
+
+192
+00:09:47,910 --> 00:09:52,210
+problems, the finger exercises, and the reading.
+
+193
+00:09:52,210 --> 00:09:53,258
+
+

@@ -1,0 +1,848 @@
+0
+00:00:00,000 --> 00:00:04,300
+...
+
+1
+00:00:04,300 --> 00:00:07,480
+Welcome back to 600.2x.
+
+2
+00:00:07,480 --> 00:00:09,720
+In the introduction to the course,
+
+3
+00:00:09,720 --> 00:00:12,655
+I talked about computational models.
+
+4
+00:00:12,655 --> 00:00:15,030
+And I said we're going to look at three kinds of models--
+
+5
+00:00:15,030 --> 00:00:19,300
+optimization models, statistical models, and simulation models.
+
+6
+00:00:19,300 --> 00:00:21,440
+In the next two lectures, we'll be
+
+7
+00:00:21,440 --> 00:00:25,520
+focusing on the role of the mature field of optimization
+
+8
+00:00:25,520 --> 00:00:26,810
+models.
+
+9
+00:00:26,810 --> 00:00:29,240
+So what is an optimization model?
+
+10
+00:00:29,240 --> 00:00:31,570
+The notion of an optimization problem
+
+11
+00:00:31,570 --> 00:00:34,050
+provides a structured way to think about solving
+
+12
+00:00:34,050 --> 00:00:36,920
+lots of computational problems.
+
+13
+00:00:36,920 --> 00:00:39,240
+Whenever you set about solving a problem that
+
+14
+00:00:39,240 --> 00:00:42,610
+involves finding the biggest, the smallest, the most,
+
+15
+00:00:42,610 --> 00:00:46,600
+the fewest, the fastest, the least expensive, et cetera,
+
+16
+00:00:46,600 --> 00:00:49,640
+there's a good chance that you can map that problem
+
+17
+00:00:49,640 --> 00:00:53,680
+onto a classic optimization problem for which there is
+
+18
+00:00:53,680 --> 00:00:56,590
+a known computational solution.
+
+19
+00:00:56,590 --> 00:01:00,460
+So what is a classic optimization problem look like?
+
+20
+00:01:00,460 --> 00:01:02,480
+It's got two parts.
+
+21
+00:01:02,480 --> 00:01:05,300
+The first part is an objective function
+
+22
+00:01:05,300 --> 00:01:08,490
+that is to be maximized or minimized.
+
+23
+00:01:08,490 --> 00:01:11,790
+For example, we want to minimize the time spent traveling
+
+24
+00:01:11,790 --> 00:01:14,810
+from New York to Boston.
+
+25
+00:01:14,810 --> 00:01:17,900
+The second part of an optimization model
+
+26
+00:01:17,900 --> 00:01:21,420
+is a set of constraints, possibly empty,
+
+27
+00:01:21,420 --> 00:01:23,420
+that must be honored.
+
+28
+00:01:23,420 --> 00:01:27,360
+For example, I want to get from New York to Boston,
+
+29
+00:01:27,360 --> 00:01:30,340
+but I can't spend more than $100,
+
+30
+00:01:30,340 --> 00:01:33,810
+or I've got to be in Boston by 5 PM.
+
+31
+00:01:33,810 --> 00:01:36,760
+To give you a sense of how ubiquitous optimization
+
+32
+00:01:36,760 --> 00:01:40,750
+problems are, all of the logos in the lower right-hand corner
+
+33
+00:01:40,750 --> 00:01:44,930
+of this slide belong to just travel-related companies,
+
+34
+00:01:44,930 --> 00:01:47,850
+one small segment of industry that
+
+35
+00:01:47,850 --> 00:01:51,358
+solve optimization problems as a central part of their business.
+
+36
+00:01:51,358 --> 00:01:53,900
+
+
+37
+00:01:53,900 --> 00:01:56,260
+What do I want you to take away from this lecture
+
+38
+00:01:56,260 --> 00:01:58,310
+and the next lecture?
+
+39
+00:01:58,310 --> 00:02:01,540
+One, many problems of real importance
+
+40
+00:02:01,540 --> 00:02:05,190
+can be simply formulated in a way that leads naturally
+
+41
+00:02:05,190 --> 00:02:07,320
+to a computational solution.
+
+42
+00:02:07,320 --> 00:02:12,850
+Two, it's way easier to reduce a problem
+
+43
+00:02:12,850 --> 00:02:17,160
+to a problem that's already been solved than it is to invent
+
+44
+00:02:17,160 --> 00:02:19,660
+your own solution to a problem.
+
+45
+00:02:19,660 --> 00:02:24,120
+So this idea of taking an informal problem,
+
+46
+00:02:24,120 --> 00:02:27,450
+formalizing it in a way that says, oh, that's
+
+47
+00:02:27,450 --> 00:02:28,500
+been solved already.
+
+48
+00:02:28,500 --> 00:02:31,450
+I can just use that-- as a message
+
+49
+00:02:31,450 --> 00:02:33,640
+I want you to take away.
+
+50
+00:02:33,640 --> 00:02:38,300
+I want you to take away the fact that optimization problems are
+
+51
+00:02:38,300 --> 00:02:39,740
+hard.
+
+52
+00:02:39,740 --> 00:02:42,450
+I don't mean hard in the sense that we scratch our head
+
+53
+00:02:42,450 --> 00:02:44,450
+and don't know how to solve them.
+
+54
+00:02:44,450 --> 00:02:47,900
+I mean hard in a computational complexity sense--
+
+55
+00:02:47,900 --> 00:02:52,540
+that they can run for a really long time.
+
+56
+00:02:52,540 --> 00:02:56,040
+Because of that, we often don't actually solve them.
+
+57
+00:02:56,040 --> 00:02:59,890
+We approximate them and we use a greedy algorithm
+
+58
+00:02:59,890 --> 00:03:03,690
+to find not an optimal solution, but a solution that
+
+59
+00:03:03,690 --> 00:03:07,000
+is good enough.
+
+60
+00:03:07,000 --> 00:03:08,960
+Let's start with the famous problem
+
+61
+00:03:08,960 --> 00:03:11,190
+called the knapsack problem.
+
+62
+00:03:11,190 --> 00:03:14,320
+For those of you who don't know what a knapsack is,
+
+63
+00:03:14,320 --> 00:03:15,560
+it's a backpack.
+
+64
+00:03:15,560 --> 00:03:18,510
+Here's a picture of a very old one.
+
+65
+00:03:18,510 --> 00:03:21,260
+The basic idea behind the knapsack problem
+
+66
+00:03:21,260 --> 00:03:22,830
+is a simple one.
+
+67
+00:03:22,830 --> 00:03:27,670
+You've got a knapsack with finite capacity and more
+
+68
+00:03:27,670 --> 00:03:30,730
+objects you'd like to put in than will actually fit in,
+
+69
+00:03:30,730 --> 00:03:33,480
+and you're deciding which objects to take,
+
+70
+00:03:33,480 --> 00:03:35,956
+which objects to leave behind.
+
+71
+00:03:35,956 --> 00:03:37,580
+Essentially, you have limited strength.
+
+72
+00:03:37,580 --> 00:03:40,370
+There's a maximum weight you can carry.
+
+73
+00:03:40,370 --> 00:03:43,000
+How do you decide which stuff to take
+
+74
+00:03:43,000 --> 00:03:46,040
+and which stuff to leave behind?
+
+75
+00:03:46,040 --> 00:03:47,540
+Now, of course, the knapsack doesn't
+
+76
+00:03:47,540 --> 00:03:49,700
+have to be a physical one.
+
+77
+00:03:49,700 --> 00:03:51,450
+Imagine that you are an overweight college
+
+78
+00:03:51,450 --> 00:03:53,620
+professor who has just decided to go
+
+79
+00:03:53,620 --> 00:03:58,400
+on a 1,500 calorie-a-day diet.
+
+80
+00:03:58,400 --> 00:04:04,160
+That imaginary person needs to optimize an objective function
+
+81
+00:04:04,160 --> 00:04:07,470
+related to his taste buds, the most possible pleasure
+
+82
+00:04:07,470 --> 00:04:11,080
+you can get by eating while satisfying the 1,500
+
+83
+00:04:11,080 --> 00:04:12,595
+calorie a day constraint.
+
+84
+00:04:12,595 --> 00:04:17,190
+
+
+85
+00:04:17,190 --> 00:04:18,420
+Very good.
+
+86
+00:04:18,420 --> 00:04:20,450
+Now I should mention that there were
+
+87
+00:04:20,450 --> 00:04:24,720
+two variants of the knapsack problem-- 0-1 knapsack
+
+88
+00:04:24,720 --> 00:04:27,080
+problem-- it's called that because you either
+
+89
+00:04:27,080 --> 00:04:31,520
+take the whole object, one, or not at all.
+
+90
+00:04:31,520 --> 00:04:35,060
+So if you are, say, stealing a Picasso painting,
+
+91
+00:04:35,060 --> 00:04:37,850
+there isn't much point in stealing half the painting.
+
+92
+00:04:37,850 --> 00:04:40,810
+Either take the whole thing or you take none of it.
+
+93
+00:04:40,810 --> 00:04:45,160
+There's also the continuous or fractional knapsack problem.
+
+94
+00:04:45,160 --> 00:04:48,790
+I don't actually have to eat this whole plate of spaghetti.
+
+95
+00:04:48,790 --> 00:04:51,700
+I can take only part of it.
+
+96
+00:04:51,700 --> 00:04:57,080
+The 0-1 problem is considerably harder than the continuous one.
+
+97
+00:04:57,080 --> 00:05:00,840
+You can think of the analogy of gold.
+
+98
+00:05:00,840 --> 00:05:02,510
+If I have my knapsack and I'm trying
+
+99
+00:05:02,510 --> 00:05:05,520
+to decide how much gold to take, deciding
+
+100
+00:05:05,520 --> 00:05:08,430
+how many bars I can fit in can be hard,
+
+101
+00:05:08,430 --> 00:05:11,290
+but if it's just gold dust, I just fill it up
+
+102
+00:05:11,290 --> 00:05:13,780
+until I can't carry it anymore, and I always
+
+103
+00:05:13,780 --> 00:05:15,580
+get to my maximum weight.
+
+104
+00:05:15,580 --> 00:05:19,870
+Whereas with the bar, maybe I could carry a half a bar more,
+
+105
+00:05:19,870 --> 00:05:23,280
+but there's no way to split it.
+
+106
+00:05:23,280 --> 00:05:25,740
+OK, that's an informal look.
+
+107
+00:05:25,740 --> 00:05:29,650
+Let's now look at how can we formalize a 0-1 knapsack
+
+108
+00:05:29,650 --> 00:05:31,350
+problem.
+
+109
+00:05:31,350 --> 00:05:34,260
+So we'll start by representing each item
+
+110
+00:05:34,260 --> 00:05:37,606
+by a pair of the value of the item
+
+111
+00:05:37,606 --> 00:05:38,730
+and the weight of the item.
+
+112
+00:05:38,730 --> 00:05:41,680
+
+
+113
+00:05:41,680 --> 00:05:45,640
+We'll then say the knapsack can accommodate items
+
+114
+00:05:45,640 --> 00:05:48,972
+with a total weight of no more than w.
+
+115
+00:05:48,972 --> 00:05:50,430
+Now, of course, weight doesn't have
+
+116
+00:05:50,430 --> 00:05:53,050
+to be literally pounds or kilos.
+
+117
+00:05:53,050 --> 00:05:55,370
+Weight could be calories.
+
+118
+00:05:55,370 --> 00:05:57,270
+Weight could be credits for a course.
+
+119
+00:05:57,270 --> 00:05:59,180
+Weight could be miles if you're driving.
+
+120
+00:05:59,180 --> 00:06:05,060
+Weight could be time-- anything that you are worried about.
+
+121
+00:06:05,060 --> 00:06:09,070
+We'll then have a vector-- call it L-- of length n,
+
+122
+00:06:09,070 --> 00:06:13,370
+representing the set of available items to take.
+
+123
+00:06:13,370 --> 00:06:15,490
+So think of each element of the vector
+
+124
+00:06:15,490 --> 00:06:19,520
+as representing a single item.
+
+125
+00:06:19,520 --> 00:06:24,400
+And then we'll have a vector v of length n also,
+
+126
+00:06:24,400 --> 00:06:27,910
+indicating whether or not each item is taken.
+
+127
+00:06:27,910 --> 00:06:30,900
+If we decide to put an item in the knapsack,
+
+128
+00:06:30,900 --> 00:06:34,450
+the vector will have a value of 1 in the spot corresponding
+
+129
+00:06:34,450 --> 00:06:36,100
+to that item.
+
+130
+00:06:36,100 --> 00:06:38,150
+If we decide not to take the item,
+
+131
+00:06:38,150 --> 00:06:40,790
+the vector will have a 0 in that spot.
+
+132
+00:06:40,790 --> 00:06:43,400
+
+
+133
+00:06:43,400 --> 00:06:46,940
+Given that setup, we can then very simply formalize
+
+134
+00:06:46,940 --> 00:06:48,970
+the problem as follows.
+
+135
+00:06:48,970 --> 00:06:53,906
+Find a v that maximizes this term.
+
+136
+00:06:53,906 --> 00:06:56,870
+
+
+137
+00:06:56,870 --> 00:06:59,190
+What is this term saying?
+
+138
+00:06:59,190 --> 00:07:08,340
+It says for each item, i, we'll look at that spot in the vector
+
+139
+00:07:08,340 --> 00:07:11,200
+and we'll multiply the value in the vector
+
+140
+00:07:11,200 --> 00:07:14,350
+by the value of that item.
+
+141
+00:07:14,350 --> 00:07:18,830
+Notice that if we don't take the item, v sub i will be 0,
+
+142
+00:07:18,830 --> 00:07:21,480
+and so we don't care what the value is.
+
+143
+00:07:21,480 --> 00:07:23,780
+So essentially, this is summing up
+
+144
+00:07:23,780 --> 00:07:28,420
+the value of all of the items we decide to take.
+
+145
+00:07:28,420 --> 00:07:34,040
+We then need to obey the constraint here
+
+146
+00:07:34,040 --> 00:07:39,850
+that for all the items we take, the weights sum up
+
+147
+00:07:39,850 --> 00:07:42,600
+to less than w.
+
+148
+00:07:42,600 --> 00:07:45,940
+So it's a very simple formulation of the problem.
+
+149
+00:07:45,940 --> 00:07:50,370
+In any 0-1 knapsack problem, we'll
+
+150
+00:07:50,370 --> 00:07:53,570
+have a formulation that looks a lot like this.
+
+151
+00:07:53,570 --> 00:07:55,550
+Of course, the objective function here
+
+152
+00:07:55,550 --> 00:07:58,620
+can be more complicated and you can
+
+153
+00:07:58,620 --> 00:08:04,560
+have no constraint sometimes, or well more than one constraint.
+
+154
+00:08:04,560 --> 00:08:07,520
+How can we solve these problems?
+
+155
+00:08:07,520 --> 00:08:11,290
+Well, it's a really simple way to solve it.
+
+156
+00:08:11,290 --> 00:08:15,720
+We can enumerate all possible combinations of items.
+
+157
+00:08:15,720 --> 00:08:18,670
+That is, to say generate every subset of items
+
+158
+00:08:18,670 --> 00:08:21,310
+that we could choose to take, including
+
+159
+00:08:21,310 --> 00:08:25,160
+the empty subset in the subset with all of the items.
+
+160
+00:08:25,160 --> 00:08:28,280
+That's called the power set.
+
+161
+00:08:28,280 --> 00:08:31,650
+We can then remove all of the combination whose
+
+162
+00:08:31,650 --> 00:08:36,000
+total units exceed the allowed weight because we're not
+
+163
+00:08:36,000 --> 00:08:37,400
+allowed to take those.
+
+164
+00:08:37,400 --> 00:08:39,470
+We're obeying here a constraint.
+
+165
+00:08:39,470 --> 00:08:43,610
+And then from the remaining combinations,
+
+166
+00:08:43,610 --> 00:08:46,950
+choose any one whose value is the largest.
+
+167
+00:08:46,950 --> 00:08:49,150
+I say anyone because there might be
+
+168
+00:08:49,150 --> 00:08:52,065
+and there often is more than one optimal solution.
+
+169
+00:08:52,065 --> 00:08:54,600
+
+
+170
+00:08:54,600 --> 00:08:58,490
+This is great, but it's usually not a practical way
+
+171
+00:08:58,490 --> 00:09:01,960
+to solve a knapsack problem.
+
+172
+00:09:01,960 --> 00:09:03,480
+Why not?
+
+173
+00:09:03,480 --> 00:09:07,860
+Well, how big is the power set?
+
+174
+00:09:07,860 --> 00:09:12,970
+Well, recall that we used a vector v of length n
+
+175
+00:09:12,970 --> 00:09:16,620
+to indicate whether or not the items were taken.
+
+176
+00:09:16,620 --> 00:09:21,370
+So the set of possible vectors represents the set
+
+177
+00:09:21,370 --> 00:09:26,280
+of possible choices of items.
+
+178
+00:09:26,280 --> 00:09:28,950
+The vector that's all 0 says we didn't take any.
+
+179
+00:09:28,950 --> 00:09:32,350
+The vector that's all 1 says we took them all.
+
+180
+00:09:32,350 --> 00:09:34,590
+And then every other possibility is represented
+
+181
+00:09:34,590 --> 00:09:38,690
+by some sequence of 0s and 1s.
+
+182
+00:09:38,690 --> 00:09:44,890
+Well, how many different numbers can we were present in n bits
+
+183
+00:09:44,890 --> 00:09:49,920
+or we can represent 2 to the n numbers?
+
+184
+00:09:49,920 --> 00:09:55,540
+So right away, we know the power set is really big.
+
+185
+00:09:55,540 --> 00:09:59,180
+It's of size 2 to the n.
+
+186
+00:09:59,180 --> 00:10:01,728
+Well, that means that the algorithm is exponential.
+
+187
+00:10:01,728 --> 00:10:05,400
+
+
+188
+00:10:05,400 --> 00:10:09,280
+If the algorithm is exponential, it can take a very long time
+
+189
+00:10:09,280 --> 00:10:10,650
+to solve.
+
+190
+00:10:10,650 --> 00:10:14,360
+For example, if there were a hundreds items to choose from--
+
+191
+00:10:14,360 --> 00:10:16,660
+and I do sometimes go to restaurants
+
+192
+00:10:16,660 --> 00:10:23,790
+with 100 items on the menu-- the power set is of this size--
+
+193
+00:10:23,790 --> 00:10:28,270
+considerably larger than I would like to actually consider.
+
+194
+00:10:28,270 --> 00:10:30,460
+What are we going to do about that?
+
+195
+00:10:30,460 --> 00:10:33,230
+Are we just being stupid is the first question.
+
+196
+00:10:33,230 --> 00:10:35,290
+I gave you a very straightforward,
+
+197
+00:10:35,290 --> 00:10:38,730
+obviously correct algorithm, and maybe I just-- there's
+
+198
+00:10:38,730 --> 00:10:41,460
+a really good algorithm that I just didn't show you.
+
+199
+00:10:41,460 --> 00:10:43,570
+Well, no.
+
+200
+00:10:43,570 --> 00:10:49,720
+The 0-1 knapsack problem is inherently exponential.
+
+201
+00:10:49,720 --> 00:10:55,060
+That means that you cannot-- there does not exist
+
+202
+00:10:55,060 --> 00:11:00,060
+an algorithm that solves it in less than exponential time.
+
+203
+00:11:00,060 --> 00:11:02,060
+But don't despair.
+
+204
+00:11:02,060 --> 00:11:04,990
+It's a hard problem, but that doesn't mean
+
+205
+00:11:04,990 --> 00:11:07,480
+we can't solve it in practice.
+
+206
+00:11:07,480 --> 00:11:12,930
+As we will see in the next segment and in lecture two,
+
+207
+00:11:12,930 --> 00:11:15,860
+there are good ways to find approximate solutions
+
+208
+00:11:15,860 --> 00:11:19,320
+to knapsack problems and there are even
+
+209
+00:11:19,320 --> 00:11:23,980
+good ways to find truly optimal solutions to knapsack problems
+
+210
+00:11:23,980 --> 00:11:27,650
+that work almost all the time.
+
+211
+00:11:27,650 --> 00:11:29,002
+
+
